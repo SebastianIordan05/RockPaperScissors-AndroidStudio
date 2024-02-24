@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">RockPaperScissorsIordan</string>
     <string name="title">Rock Paper Scissors</string>
+    <string name="rock">rock</string>
+    <string name="paper">paper</string>
+    <string name="scissors">scissors</string>
+    <string name="YourChoice">Your choice</string>
+    <string name="opponentsChoice">Opponent\'s choice</string>
 </resources>
