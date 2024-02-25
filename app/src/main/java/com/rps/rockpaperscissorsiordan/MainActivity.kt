@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rps.rockpaperscissorsiordan.ui.theme.RockPaperScissorsIordanTheme
 import androidx.compose.foundation.layout.fillMaxWidth
+import kotlin.random.Random
 
 
 class MainActivity : ComponentActivity() {
@@ -49,7 +50,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Layout() {
     var selectedImg by remember { mutableStateOf("") }
-    var selectedImgOpponent by remember { mutableStateOf("") }
+    var selectedImgOpponent by remember { mutableStateOf(0) }
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -77,48 +78,45 @@ fun Layout() {
                     text = stringResource(id = R.string.opponentsChoice)
                 )
                 Image(
-                    painter = painterResource(id = getImageResourceId(selectedImgOpponent)),
-                    contentDescription = selectedImgOpponent,
+                    painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
+                    contentDescription = "test",
                     modifier = Modifier.size(100.dp)
                 )
             }
         }
-
-        Text(
-            text = stringResource(id = R.string.yourButtons)
-        )
-
         Row (
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
-            Button(onClick = { selectedImg = "rock" }) {
+            Button(onClick = {
+                selectedImg = "rock"
+                selectedImgOpponent = random()}) {
                 Text(text = stringResource(id = R.string.rock))
             }
-            Button(onClick = { selectedImg = "paper" }) {
+            Button(onClick = {
+                selectedImg = "paper"
+                selectedImgOpponent = random()}) {
                 Text(text = stringResource(id = R.string.paper))
             }
-            Button(onClick = { selectedImg = "scissors" }) {
+            Button(onClick = {
+                selectedImg = "scissors"
+                selectedImgOpponent = random()}) {
                 Text(text = stringResource(id = R.string.scissors))
             }
         }
+    }
+}
 
-        Text(
-            text = stringResource(id = R.string.opponentsButtons)
-        )
+fun random(): Int {
+    val random = Random.Default
+    return random.nextInt(3) + 1
+}
 
-        Row (
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Button(onClick = { selectedImgOpponent = "rock" }) {
-                Text(text = stringResource(id = R.string.rock))
-            }
-            Button(onClick = { selectedImgOpponent = "paper" }) {
-                Text(text = stringResource(id = R.string.paper))
-            }
-            Button(onClick = { selectedImgOpponent = "scissors" }) {
-                Text(text = stringResource(id = R.string.scissors))
-            }
-        }
+fun getOpponentsResourceId(game: Int): Int {
+    return when (game) {
+        1 -> R.drawable.rock
+        2 -> R.drawable.paper
+        3-> R.drawable.scissors
+        else -> R.drawable.rock
     }
 }
 
