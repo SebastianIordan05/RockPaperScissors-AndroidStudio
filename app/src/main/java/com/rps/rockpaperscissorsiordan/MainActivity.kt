@@ -28,6 +28,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rps.rockpaperscissorsiordan.ui.theme.RockPaperScissorsIordanTheme
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.runtime.mutableIntStateOf
 import kotlin.random.Random
 
 
@@ -50,7 +51,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Layout() {
     var selectedImg by remember { mutableStateOf("") }
-    var selectedImgOpponent by remember { mutableStateOf(0) }
+    var selectedImgOpponent by remember { mutableIntStateOf(0) }
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,7 +80,7 @@ fun Layout() {
                 )
                 Image(
                     painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
-                    contentDescription = "test",
+                    contentDescription = null,
                     modifier = Modifier.size(100.dp)
                 )
             }
