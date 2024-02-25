@@ -29,7 +29,11 @@ import androidx.compose.ui.unit.dp
 import com.rps.rockpaperscissorsiordan.ui.theme.RockPaperScissorsIordanTheme
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.ui.text.font.FontStyle
 import kotlin.random.Random
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 
 
 class MainActivity : ComponentActivity() {
@@ -56,48 +60,55 @@ fun Layout() {
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
-        modifier = Modifier.padding(horizontal = 10.dp, vertical = 10.dp)
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text (
             text = stringResource(id = R.string.title),
-            fontWeight = FontWeight(800)
+            fontWeight = FontWeight(800),
+            fontStyle = FontStyle.Italic,
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            textAlign = TextAlign.Center
         )
-
+        Row (
+            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 5.dp),
+            horizontalArrangement = Arrangement.Center
+        ){
+            Text(
+                text = stringResource(id = R.string.YourChoice),
+                modifier = Modifier.padding(horizontal = 10.dp)
+            )
+            Text(
+                text = stringResource(id = R.string.opponentsChoice)
+            )
+        }
         Row {
-            Column {
-                Text(
-                    text = stringResource(id = R.string.YourChoice)
-                )
-                Image(
-                    painter = painterResource(id = getImageResourceId(selectedImg)),
-                    contentDescription = selectedImg,
-                    modifier = Modifier.size(100.dp)
-                )
-            }
-            Column {
-                Text(
-                    text = stringResource(id = R.string.opponentsChoice)
-                )
-                Image(
-                    painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
-                    contentDescription = null,
-                    modifier = Modifier.size(100.dp)
-                )
-            }
+            Image(
+                painter = painterResource(id = getImageResourceId(selectedImg)),
+                contentDescription = selectedImg,
+                modifier = Modifier.size(100.dp).padding(10.dp)
+            )
+            Image(
+                painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
+                contentDescription = null,
+                modifier = Modifier.size(100.dp).padding(10.dp)
+            )
         }
         Row (
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ){
             Button(onClick = {
                 selectedImg = "rock"
                 selectedImgOpponent = random()}) {
                 Text(text = stringResource(id = R.string.rock))
             }
+            Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
                 selectedImg = "paper"
                 selectedImgOpponent = random()}) {
                 Text(text = stringResource(id = R.string.paper))
             }
+            Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
                 selectedImg = "scissors"
                 selectedImgOpponent = random()}) {
