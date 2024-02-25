@@ -6,4 +6,6 @@
     <string name="scissors">scissors</string>
     <string name="YourChoice">Your choice</string>
     <string name="opponentsChoice">Opponent\'s choice</string>
+    <string name="yourButtons">Your buttons</string>
+    <string name="opponentsButtons">Opponent\'s buttons</string>
 </resources>
