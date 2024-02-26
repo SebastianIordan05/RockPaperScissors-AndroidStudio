@@ -34,6 +34,7 @@ import kotlin.random.Random
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.width
+import androidx.compose.ui.draw.rotate
 
 
 class MainActivity : ComponentActivity() {
@@ -75,17 +76,18 @@ fun Layout() {
         ){
             Text(
                 text = stringResource(id = R.string.YourChoice),
-                modifier = Modifier.padding(horizontal = 10.dp)
+                modifier = Modifier.padding(horizontal = 5.dp)
             )
             Text(
-                text = stringResource(id = R.string.opponentsChoice)
+                text = stringResource(id = R.string.opponentsChoice),
+                modifier = Modifier.padding(horizontal = 5.dp)
             )
         }
         Row {
             Image(
                 painter = painterResource(id = getImageResourceId(selectedImg)),
                 contentDescription = selectedImg,
-                modifier = Modifier.size(100.dp).padding(10.dp)
+                modifier = Modifier.size(100.dp).padding(10.dp).rotate(degrees = 180f)
             )
             Image(
                 painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
@@ -100,19 +102,22 @@ fun Layout() {
             Button(onClick = {
                 selectedImg = "rock"
                 selectedImgOpponent = random()}) {
-                Text(text = stringResource(id = R.string.rock))
+                Text(text = stringResource(id = R.string.rock),
+                    fontWeight = FontWeight(800))
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
                 selectedImg = "paper"
                 selectedImgOpponent = random()}) {
-                Text(text = stringResource(id = R.string.paper))
+                Text(text = stringResource(id = R.string.paper),
+                    fontWeight = FontWeight(800))
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
                 selectedImg = "scissors"
                 selectedImgOpponent = random()}) {
-                Text(text = stringResource(id = R.string.scissors))
+                Text(text = stringResource(id = R.string.scissors),
+                    fontWeight = FontWeight(800))
             }
         }
     }
@@ -123,8 +128,8 @@ fun random(): Int {
     return random.nextInt(3) + 1
 }
 
-fun getOpponentsResourceId(game: Int): Int {
-    return when (game) {
+fun getOpponentsResourceId(random: Int): Int {
+    return when (random) {
         1 -> R.drawable.rock
         2 -> R.drawable.paper
         3-> R.drawable.scissors
@@ -141,7 +146,7 @@ fun getImageResourceId(game: String): Int {
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun GreetingPreview() {
     RockPaperScissorsIordanTheme {
