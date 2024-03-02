@@ -67,11 +67,15 @@ fun Layout() {
             text = stringResource(id = R.string.title),
             fontWeight = FontWeight(800),
             fontStyle = FontStyle.Italic,
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
             textAlign = TextAlign.Center
         )
         Row (
-            modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 5.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 5.dp),
             horizontalArrangement = Arrangement.Center
         ){
             Text(
@@ -87,12 +91,17 @@ fun Layout() {
             Image(
                 painter = painterResource(id = getImageResourceId(selectedImg)),
                 contentDescription = selectedImg,
-                modifier = Modifier.size(100.dp).padding(10.dp).rotate(degrees = 180f)
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(10.dp)
+                    .rotate(degrees = 180f)
             )
             Image(
                 painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
                 contentDescription = null,
-                modifier = Modifier.size(100.dp).padding(10.dp)
+                modifier = Modifier
+                    .size(100.dp)
+                    .padding(10.dp)
             )
         }
         Row (
@@ -101,25 +110,38 @@ fun Layout() {
         ){
             Button(onClick = {
                 selectedImg = "rock"
-                selectedImgOpponent = random()}) {
+                selectedImgOpponent = random()
+            }) {
                 Text(text = stringResource(id = R.string.rock),
                     fontWeight = FontWeight(800))
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
                 selectedImg = "paper"
-                selectedImgOpponent = random()}) {
+                selectedImgOpponent = random()
+            }) {
                 Text(text = stringResource(id = R.string.paper),
                     fontWeight = FontWeight(800))
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
                 selectedImg = "scissors"
-                selectedImgOpponent = random()}) {
+                selectedImgOpponent = random()
+            }) {
                 Text(text = stringResource(id = R.string.scissors),
                     fontWeight = FontWeight(800))
             }
         }
+        Text(
+            text = "User Score: ", //$userScore
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(8.dp)
+        )
+        Text(
+            text = "Opponent Score: ", //$opponentScore
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.padding(8.dp)
+        )
     }
 }
 
