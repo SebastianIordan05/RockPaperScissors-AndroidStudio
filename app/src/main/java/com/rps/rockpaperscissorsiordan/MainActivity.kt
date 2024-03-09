@@ -145,6 +145,7 @@ fun Layout() {
     }
 }
 
+// random
 fun random(): Int {
     val random = Random.Default
     return random.nextInt(3) + 1
