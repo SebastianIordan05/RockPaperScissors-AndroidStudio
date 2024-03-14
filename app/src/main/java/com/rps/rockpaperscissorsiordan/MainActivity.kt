@@ -55,8 +55,21 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Layout() {
-    var selectedImg by remember { mutableStateOf("") }
+    var selectedImg by remember { mutableStateOf(0) }
     var selectedImgOpponent by remember { mutableIntStateOf(0) }
+    var userPoints by remember { mutableIntStateOf(0) }
+    var oppPoints by remember { mutableIntStateOf(0) }
+
+    fun points() {
+        if (selectedImg != selectedImgOpponent) {
+            if (selectedImg == 1 && selectedImgOpponent == 3 ||
+                selectedImg == 2 && selectedImgOpponent == 1 ||
+                selectedImg == 3 && selectedImgOpponent == 2) {
+                userPoints++
+            } else
+                oppPoints++
+        }
+    }
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -90,7 +103,7 @@ fun Layout() {
         Row {
             Image(
                 painter = painterResource(id = getImageResourceId(selectedImg)),
-                contentDescription = selectedImg,
+                contentDescription = null,
                 modifier = Modifier
                     .size(100.dp)
                     .padding(10.dp)
@@ -109,43 +122,45 @@ fun Layout() {
             horizontalArrangement = Arrangement.Center
         ){
             Button(onClick = {
-                selectedImg = "rock"
+                selectedImg = 1
                 selectedImgOpponent = random()
+                points()
             }) {
                 Text(text = stringResource(id = R.string.rock),
                     fontWeight = FontWeight(800))
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
-                selectedImg = "paper"
+                selectedImg = 2
                 selectedImgOpponent = random()
+                points()
             }) {
                 Text(text = stringResource(id = R.string.paper),
                     fontWeight = FontWeight(800))
             }
             Spacer(modifier = Modifier.width(10.dp))
             Button(onClick = {
-                selectedImg = "scissors"
+                selectedImg = 3
                 selectedImgOpponent = random()
+                points()
             }) {
                 Text(text = stringResource(id = R.string.scissors),
                     fontWeight = FontWeight(800))
             }
         }
         Text(
-            text = "User Score: ", //$userScore
+            text = "User Score: $userPoints",
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(8.dp)
         )
         Text(
-            text = "Opponent Score: ", //$opponentScore
+            text = "Opponent Score: $oppPoints",
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(8.dp)
         )
     }
 }
 
-// random
 fun random(): Int {
     val random = Random.Default
     return random.nextInt(3) + 1
@@ -160,11 +175,11 @@ fun getOpponentsResourceId(random: Int): Int {
     }
 }
 
-fun getImageResourceId(game: String): Int {
+fun getImageResourceId(game: Int): Int {
     return when (game) {
-        "rock" -> R.drawable.rock
-        "paper" -> R.drawable.paper
-        "scissors" -> R.drawable.scissors
+        1 -> R.drawable.rock
+        2 -> R.drawable.paper
+        3 -> R.drawable.scissors
         else -> R.drawable.rock
     }
 }
