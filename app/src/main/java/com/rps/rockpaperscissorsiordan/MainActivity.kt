@@ -16,7 +16,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -55,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Layout() {
-    var selectedImg by remember { mutableStateOf(0) }
+    var selectedImg by remember { mutableIntStateOf(0) }
     var selectedImgOpponent by remember { mutableIntStateOf(0) }
     var userPoints by remember { mutableIntStateOf(0) }
     var oppPoints by remember { mutableIntStateOf(0) }
