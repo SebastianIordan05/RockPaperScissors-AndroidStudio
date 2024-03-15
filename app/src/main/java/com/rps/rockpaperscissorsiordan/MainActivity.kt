@@ -101,16 +101,16 @@ fun Layout() {
         }
         Row {
             Image(
-                painter = painterResource(id = getImageResourceId(selectedImg)),
-                contentDescription = null,
+                painter = painterResource(id = yourImage(selectedImg)),
+                contentDescription = getString(selectedImg),
                 modifier = Modifier
                     .size(100.dp)
                     .padding(10.dp)
                     .rotate(degrees = 180f)
             )
             Image(
-                painter = painterResource(id = getOpponentsResourceId(selectedImgOpponent)),
-                contentDescription = null,
+                painter = painterResource(id = oppImage(selectedImgOpponent)),
+                contentDescription = getString(selectedImgOpponent),
                 modifier = Modifier
                     .size(100.dp)
                     .padding(10.dp)
@@ -160,12 +160,21 @@ fun Layout() {
     }
 }
 
+fun getString(value: Int): String {
+    return when (value) {
+        1 -> "rock"
+        2 -> "paper"
+        3-> "scissors"
+        else -> "rock"
+    }
+}
+
 fun random(): Int {
     val random = Random.Default
     return random.nextInt(3) + 1
 }
 
-fun getOpponentsResourceId(random: Int): Int {
+fun oppImage(random: Int): Int {
     return when (random) {
         1 -> R.drawable.rock
         2 -> R.drawable.paper
@@ -174,7 +183,7 @@ fun getOpponentsResourceId(random: Int): Int {
     }
 }
 
-fun getImageResourceId(game: Int): Int {
+fun yourImage(game: Int): Int {
     return when (game) {
         1 -> R.drawable.rock
         2 -> R.drawable.paper
