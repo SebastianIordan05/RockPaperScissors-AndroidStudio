@@ -101,7 +101,7 @@ fun Layout() {
         }
         Row {
             Image(
-                painter = painterResource(id = yourImage(selectedImg)),
+                painter = painterResource(id = getImage(selectedImg)),
                 contentDescription = getString(selectedImg),
                 modifier = Modifier
                     .size(100.dp)
@@ -109,7 +109,7 @@ fun Layout() {
                     .rotate(degrees = 180f)
             )
             Image(
-                painter = painterResource(id = oppImage(selectedImgOpponent)),
+                painter = painterResource(id = getImage(selectedImgOpponent)),
                 contentDescription = getString(selectedImgOpponent),
                 modifier = Modifier
                     .size(100.dp)
@@ -157,6 +157,8 @@ fun Layout() {
             fontWeight = FontWeight.Bold,
             modifier = Modifier.padding(8.dp)
         )
+        // Text(text = "your img: " + getString(selectedImg))
+        // Text(text = "opp img: " + getString(selectedImgOpponent))
     }
 }
 
@@ -174,20 +176,11 @@ fun random(): Int {
     return random.nextInt(3) + 1
 }
 
-fun oppImage(random: Int): Int {
+fun getImage(random: Int): Int {
     return when (random) {
         1 -> R.drawable.rock
         2 -> R.drawable.paper
         3-> R.drawable.scissors
-        else -> R.drawable.rock
-    }
-}
-
-fun yourImage(game: Int): Int {
-    return when (game) {
-        1 -> R.drawable.rock
-        2 -> R.drawable.paper
-        3 -> R.drawable.scissors
         else -> R.drawable.rock
     }
 }
